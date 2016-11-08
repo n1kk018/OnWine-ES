@@ -7,13 +7,17 @@
 				"my_analyzer": {
 					"type": "custom",
 					"tokenizer": "whitespace",
-					"filter" : ["standard", "asciifolding", "lowercase", "my_stop", "my_snow"]
+					"filter" : ["standard", "asciifolding", "lowercase", "elision", "my_stop", "my_snow"]
 				}
 			},
 			"filter" : {
 			    "my_stop": {
                     "type":       "stop",
                     "stopwords":  "_french_"
+                },
+                "elision" : {
+                "type" : "elision",
+                "articles" : ["l", "m", "t", "qu", "n", "s", "j","(",")"]
                 },
                 "my_snow" : {
                     "type" : "snowball",

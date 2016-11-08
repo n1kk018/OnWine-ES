@@ -2,9 +2,11 @@ package fr.afcepf.atod.es.repository;
 
 import java.util.List;
 
+import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.data.elasticsearch.core.query.SearchQuery;
@@ -24,7 +26,7 @@ public class WineRepositoryImpl implements WineRepositoryCustom {
     public List<Wine> listByWineFeatureId(Integer id) {
         QueryBuilder builder = QueryBuilders.nestedQuery("features", QueryBuilders.boolQuery()
                 .must(QueryBuilders.termQuery("features.id",id)));
-        SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(builder).build();
+        SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(builder).withPageable(new PageRequest(0,200)).build();
         return esTemplate.queryForList(searchQuery,Wine.class);
     }
 }
