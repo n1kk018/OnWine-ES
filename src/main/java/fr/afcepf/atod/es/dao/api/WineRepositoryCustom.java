@@ -5,4 +5,6 @@ import fr.afcepf.atod.es.domain.Wine;
 
 public interface WineRepositoryCustom {
     List<Wine> listByWineFeatureId(Integer Id);
+
+    void deleteIndex();
 }

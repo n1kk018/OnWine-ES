@@ -19,8 +19,6 @@ import org.springframework.data.elasticsearch.repository.config.EnableElasticsea
 @EnableElasticsearchRepositories(basePackages = "fr.afcepf.atod.es.repository")
 @ComponentScan(basePackages = {"fr.afcepf.atod.es.service"})
 public class ElasticsearchConfiguration {
-
-
     @Bean
     public ElasticsearchOperations elasticsearchTemplate() {
         return new ElasticsearchTemplate(client());

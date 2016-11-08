@@ -19,6 +19,10 @@ public class WineService {
         return wineRepo.save(wine);
     }
     
+    public void deleteIdx() {
+        wineRepo.deleteIndex();
+    }
+    
     public void deleteAll() {
         wineRepo.deleteAll();
     }

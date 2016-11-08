@@ -14,11 +14,16 @@ import fr.afcepf.atod.es.domain.Wine;
 public class WineRepositoryImpl implements WineRepositoryCustom {
     @Autowired
     private ElasticsearchOperations esTemplate;
+    
+    @Override
+    public void deleteIndex() {
+        esTemplate.deleteIndex(Wine.class);
+    }
 
     @Override
-    public List<Wine> listByWineFeatureId(Integer Id) {
+    public List<Wine> listByWineFeatureId(Integer id) {
         QueryBuilder builder = QueryBuilders.nestedQuery("features", QueryBuilders.boolQuery()
-                .must(QueryBuilders.termQuery("features.id",1)));
+                .must(QueryBuilders.termQuery("features.id",id)));
         SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(builder).build();
         return esTemplate.queryForList(searchQuery,Wine.class);
     }

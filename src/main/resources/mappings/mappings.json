@@ -1,0 +1,80 @@
+{
+	"wine": {
+		"_all": {
+			"enabled": true
+		},
+		"properties": {
+			"appellation": {
+				"type": "string",
+				"analyzer": "french"
+			},
+			"appellation_EN": {
+				"type": "string",
+				"analyzer": "english"
+			},
+			"features": {
+				"type": "nested",
+				"properties": {
+		            "id": {
+                        "type": "long"
+                    },
+                    "label": {
+                        "type": "string",
+                        "analyzer": "my_analyzer"
+                    },
+                    "label_EN": {
+                        "type": "string",
+                        "analyzer": "english"
+                    }
+				}
+			},
+			"id": {
+				"type": "long"
+			},
+			"name": {
+				"type": "string",
+				"analyzer": "my_analyzer"
+			},
+			"price": {
+				"type": "double"
+			},
+			"type": {
+				"properties": {
+					"id": {
+						"type": "long"
+					},
+					"type": {
+						"type": "string",
+						"analyzer": "french"
+					},
+					"type_EN": {
+						"type": "string",
+						"analyzer": "english"
+					}
+				}
+			},
+			"varietal": {
+				"properties": {
+					"description": {
+						"type": "string",
+						"analyzer": "french"
+					},
+					"description_EN": {
+						"type": "string",
+						"analyzer": "english"
+					},
+					"id": {
+						"type": "long"
+					}
+				}
+			},
+			"vintage": {
+				"properties": {
+					"year": {
+						"type": "long"
+					}
+				}
+			}
+		}
+	}
+}

@@ -11,8 +11,8 @@ import org.springframework.data.elasticsearch.annotations.Mapping;
 import org.springframework.data.elasticsearch.annotations.Setting;
 
 @Document(indexName="product", type="wine")
-@Setting(settingPath = "/settings.json")
-@Mapping(mappingPath = "/mappings.json")
+@Setting(settingPath = "/settings/settings.json")
+@Mapping(mappingPath = "/mappings/mappings.json")
 public class Wine {
     @Id
     private Integer id;
