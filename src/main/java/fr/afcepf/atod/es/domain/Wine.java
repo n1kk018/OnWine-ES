@@ -7,8 +7,12 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
+import org.springframework.data.elasticsearch.annotations.Mapping;
+import org.springframework.data.elasticsearch.annotations.Setting;
 
 @Document(indexName="product", type="wine")
+@Setting(settingPath = "/settings.json")
+@Mapping(mappingPath = "/mappings.json")
 public class Wine {
     @Id
     private Integer id;
@@ -16,6 +20,7 @@ public class Wine {
     private String appellation_EN;
     private String appellation;
     private Double price;
+    private Integer apiId;
     @Field(type = FieldType.Object)
     private WineType type;
     @Field(type = FieldType.Object)
@@ -27,13 +32,14 @@ public class Wine {
     public Wine() {
         super();
     }
-    public Wine(Integer paramId, String paramName, String paramAppellation_EN, Double paramPrice, WineType paramType,
+    public Wine(Integer paramId, String paramName, String paramAppellation_EN, Double paramPrice, Integer paramApiId, WineType paramType,
             WineVintage paramVintage, WineVarietal paramVarietal) {
         super();
         id = paramId;
         name = paramName;
         appellation_EN = paramAppellation_EN;
         price = paramPrice;
+        apiId = paramApiId;
         type = paramType;
         vintage = paramVintage;
         varietal = paramVarietal;
@@ -68,6 +74,18 @@ public class Wine {
     }
     public void setPrice(Double paramPrice) {
         price = paramPrice;
+    }
+    /**
+     * @return the apiId
+     */
+    public Integer getApiId() {
+        return apiId;
+    }
+    /**
+     * @param paramApiId the apiId to set
+     */
+    public void setApiId(Integer paramApiId) {
+        apiId = paramApiId;
     }
     public WineType getType() {
         return type;
