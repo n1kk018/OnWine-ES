@@ -3,6 +3,8 @@ package fr.afcepf.atod.es.repository;
 import java.util.List;
 
 import org.elasticsearch.action.search.SearchRequestBuilder;
+import org.elasticsearch.common.unit.Fuzziness;
+import org.elasticsearch.index.query.MatchQueryBuilder.Operator;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,4 +31,18 @@ public class WineRepositoryImpl implements WineRepositoryCustom {
         SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(builder).withPageable(new PageRequest(0,200)).build();
         return esTemplate.queryForList(searchQuery,Wine.class);
     }
+
+    @Override
+    public List<Wine> searchByStringQuery(String paramStr) {
+        SearchQuery searchQuery = new NativeSearchQueryBuilder()
+                .withQuery(QueryBuilders.matchQuery(paramStr, "name")
+                .operator(Operator.AND)
+                .fuzziness(Fuzziness.ONE)
+                .prefixLength(3))
+                .withPageable(new PageRequest(0,200))
+                .build();
+        return esTemplate.queryForList(searchQuery,Wine.class);
+    }
+    
+    
 }

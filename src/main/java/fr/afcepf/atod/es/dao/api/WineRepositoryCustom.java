@@ -7,4 +7,6 @@ public interface WineRepositoryCustom {
     List<Wine> listByWineFeatureId(Integer Id);
 
     void deleteIndex();
+    
+    List<Wine> searchByStringQuery(String str);
 }
