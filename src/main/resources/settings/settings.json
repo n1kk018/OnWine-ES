@@ -4,24 +4,44 @@
 		"number_of_replicas": "0",
 		"analysis": {
 			"analyzer": {
-				"my_analyzer": {
+				"my_fr_analyzer": {
 					"type": "custom",
-					"tokenizer": "whitespace",
-					"filter" : ["standard", "asciifolding", "lowercase", "elision", "my_stop", "my_snow"]
-				}
+					"tokenizer": "standard",
+					"filter" : ["standard", "asciifolding", "lowercase", "elision", "my_stop_fr"]
+				},
+				"my_fr_autocomplete": {
+                    "type": "custom",
+                    "tokenizer": "standard",
+                    "filter" : ["standard", "asciifolding", "lowercase", "elision", "my_stop_fr", "autocomplete_filter"]
+                },
+				"my_en_analyzer": {
+                    "type": "custom",
+                    "tokenizer": "standard",
+                    "filter" : ["standard", "asciifolding", "lowercase", "my_stop_en"]
+                },
+                "my_en_autocomplete": {
+                    "type": "custom",
+                    "tokenizer": "standard",
+                    "filter" : ["standard", "asciifolding", "lowercase", "my_stop_en", "autocomplete_filter"]
+                }
 			},
 			"filter" : {
-			    "my_stop": {
+                "elision" : {
+                    "type" : "elision",
+                    "articles" : ["l", "m", "t", "qu", "n", "s", "j","(",")"]
+                },
+                "autocomplete_filter": {
+                  "type": "edgeNGram",
+                  "min_gram": 2,
+                  "max_gram": 20
+                },
+                "my_stop_fr": {
                     "type":       "stop",
                     "stopwords":  "_french_"
                 },
-                "elision" : {
-                "type" : "elision",
-                "articles" : ["l", "m", "t", "qu", "n", "s", "j","(",")"]
-                },
-                "my_snow" : {
-                    "type" : "snowball",
-                    "language" : "french"
+                "my_stop_en": {
+                    "type":       "stop",
+                    "stopwords":  "_english_"
                 }
             }
 		}

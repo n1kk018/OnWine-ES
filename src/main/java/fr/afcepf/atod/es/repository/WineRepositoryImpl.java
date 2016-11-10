@@ -34,12 +34,19 @@ public class WineRepositoryImpl implements WineRepositoryCustom {
 
     @Override
     public List<Wine> searchByStringQuery(String paramStr) {
+        QueryBuilder boolQueryBuilder = QueryBuilders.boolQuery()
+                .should(QueryBuilders.multiMatchQuery(paramStr, 
+                        "name", "type.type*", "appellation*",
+                        "varietal.description*", "vintage.year")
+                       .operator(Operator.AND)
+                       .prefixLength(3))
+                .should(QueryBuilders.nestedQuery("features",QueryBuilders.multiMatchQuery(
+                        paramStr,
+                        "features.label*")
+                        .prefixLength(3)));
         SearchQuery searchQuery = new NativeSearchQueryBuilder()
-                .withQuery(QueryBuilders.matchQuery(paramStr, "name")
-                .operator(Operator.AND)
-                .fuzziness(Fuzziness.ONE)
-                .prefixLength(3))
-                .withPageable(new PageRequest(0,200))
+                .withQuery(boolQueryBuilder)
+                .withPageable(new PageRequest(0,206))
                 .build();
         return esTemplate.queryForList(searchQuery,Wine.class);
     }

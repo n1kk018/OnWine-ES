@@ -3,21 +3,21 @@ import java.io.Serializable;
 
 
 public class WineVintage{
-    private Integer year;
+    private String year;
     
     public WineVintage() {
         super();
     }
     
-    public WineVintage(Integer paramYear) {
+    public WineVintage(String paramYear) {
         super();
         year = paramYear;
     }
 
-    public Integer getYear() {
+    public String getYear() {
         return year;
     }
-    public void setYear(Integer paramYear) {
+    public void setYear(String paramYear) {
         year = paramYear;
     } 
     

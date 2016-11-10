@@ -6,25 +6,30 @@
 		"properties": {
 			"appellation": {
 				"type": "string",
-				"analyzer": "french"
+				"analyzer": "my_fr_autocomplete",
+				"search_analyzer": "my_fr_analyzer"
 			},
 			"appellation_EN": {
 				"type": "string",
-				"analyzer": "english"
+				"analyzer": "my_en_autocomplete",
+                "search_analyzer": "my_en_analyzer"
 			},
 			"features": {
 				"type": "nested",
+				"include_in_all": true,
 				"properties": {
 		            "id": {
                         "type": "long"
                     },
                     "label": {
                         "type": "string",
-                        "analyzer": "my_analyzer"
+                        "analyzer": "my_fr_autocomplete",
+                        "search_analyzer": "my_fr_analyzer"
                     },
                     "label_EN": {
                         "type": "string",
-                        "analyzer": "english"
+                        "analyzer": "my_en_autocomplete",
+                        "search_analyzer": "my_en_analyzer"
                     }
 				}
 			},
@@ -33,7 +38,8 @@
 			},
 			"name": {
 				"type": "string",
-				"analyzer": "my_analyzer"
+				"analyzer": "my_fr_autocomplete",
+                "search_analyzer": "my_fr_analyzer"
 			},
 			"price": {
 				"type": "double"
@@ -45,11 +51,13 @@
 					},
 					"type": {
 						"type": "string",
-						"analyzer": "french"
+						"analyzer": "my_fr_autocomplete",
+                        "search_analyzer": "my_fr_analyzer"
 					},
 					"type_EN": {
 						"type": "string",
-						"analyzer": "english"
+						"analyzer": "my_en_autocomplete",
+                        "search_analyzer": "my_en_analyzer"
 					}
 				}
 			},
@@ -57,11 +65,13 @@
 				"properties": {
 					"description": {
 						"type": "string",
-						"analyzer": "french"
+						"analyzer": "my_fr_autocomplete",
+                        "search_analyzer": "my_fr_analyzer"
 					},
 					"description_EN": {
 						"type": "string",
-						"analyzer": "english"
+						"analyzer": "my_en_autocomplete",
+                        "search_analyzer": "my_en_analyzer"
 					},
 					"id": {
 						"type": "long"
@@ -71,7 +81,9 @@
 			"vintage": {
 				"properties": {
 					"year": {
-						"type": "long"
+						"type": "string",
+						"analyzer": "standard",
+						"search_analyzer": "my_fr_analyzer"
 					}
 				}
 			}
