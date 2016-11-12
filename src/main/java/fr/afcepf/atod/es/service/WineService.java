@@ -45,4 +45,14 @@ public class WineService {
     {
         return wineRepo.listByWineFeatureId(id);
     }
+    
+    public List<Wine> searchByStringQuery(String str)
+    {
+        return wineRepo.searchByStringQuery(str);
+    }
+    
+    public Wine findById(Integer id)
+    {
+        return wineRepo.findOne(id);
+    }
 }
